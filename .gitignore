@@ -2,10 +2,10 @@
 node_modules
 
 # config files 
-app/config
+/app/config/*
 
 # build 
-build
+/build/*
 
 # logs
 *.log
