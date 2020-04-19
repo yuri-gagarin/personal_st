@@ -1,9 +1,27 @@
 #mainMonitor {
-
+  position: absolute;
+  top: 0px;
+  right: 11.5px;
+  bottom: 0px;
+  left: 1.5px;
+  border: 13px solid rgb(0, 0, 0);
+  border-radius: 14px;
 }
 
 #mainMonitorBezel {
-
+  position: absolute;
+  top: 0;
+  bottom: 20%;
+  left: 0;
+  right: 0;
+  border-top: 5px solid transparent;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-image-source: url("./../images/screen/crt_bezel.jpg");
+  border-image-slice: 200 fill;
+  border-image-outset: 0px;
+  overflow: hidden;
+  z-index: 10;
 }
 
 #monitorCRT:before {
@@ -16,7 +34,7 @@
   display: block;
   background: linear-gradient(
     to bottom,
-    rgba(18, 16, 16, 0) 50%,
+    rgba(3, 27, 13, 0.233) 50%,
     rgba(0, 0, 0, 0.25) 50%
   );
   background-size: 100% 8px;
@@ -28,16 +46,16 @@
   position: absolute;
   bottom: 100%;
   width: 100%;
-  height: 100px;
+  height: 200px;
   z-index: 6;
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 0)0%,
-    rgba(194, 14, 14, 0.2) 10%,
-    rgba(66, 2, 2, 0.1) 100%
+    rgba(255, 255, 255, 0.2) 10%,
+    rgba(0, 0, 0, 0.1) 100%
   );
   opacity: 0.5;
-  animation: monitorScanline 10s linear infinite;
+  animation: monitorScanline 8s linear infinite;
 }
 
 @keyframes monitorScanline {

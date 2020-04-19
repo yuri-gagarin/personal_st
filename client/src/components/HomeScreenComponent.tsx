@@ -1,5 +1,6 @@
 import React, { MouseEvent } from "react";
 import "./HomeScreenComponent.css";
+//import crtBezel from "../../public/images/screen/crt_bezel.jpg";
 
 interface HomeScreenProps {
   title: string,
@@ -13,8 +14,8 @@ const HomeScreenComponent: React.SFC<HomeScreenProps> = (props: HomeScreenProps)
   };
 
   return (
-    <div id="mainMonitor">
-      <div id="mainMonitorBezel">
+    <div id="mainMonitorBezel">
+      <div id="mainMonitor">
         <div id="monitorCRT" onClick={handleClick}>
         <div className="monitorScanline"></div>
         <div className="terminal"></div>
