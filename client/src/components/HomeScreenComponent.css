@@ -1,0 +1,52 @@
+#mainMonitor {
+
+}
+
+#mainMonitorBezel {
+
+}
+
+#monitorCRT:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: " ";
+  display: block;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 8px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.monitorScanline {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  height: 100px;
+  z-index: 6;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0)0%,
+    rgba(194, 14, 14, 0.2) 10%,
+    rgba(66, 2, 2, 0.1) 100%
+  );
+  opacity: 0.5;
+  animation: monitorScanline 10s linear infinite;
+}
+
+@keyframes monitorScanline {
+  0% { bottom: 100%; }
+  80% { bottom: 100%; }
+  100% { bottom: 0% }
+}
+
+.terminal {
+
+}
+
