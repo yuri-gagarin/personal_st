@@ -1,0 +1,10 @@
+#crtControls {
+  height: 20vh;
+  position: relative;
+  background-image: url("./../../../images/screen/crt_bezel_horizontal.jpg");
+  background-size: 100% auto;
+}
+
+#crtPowerButton {
+  color: red;
+}

@@ -14,7 +14,7 @@
   border-top: 5px solid transparent;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-image-source: url("./../images/screen/crt_bezel.jpg");
+  border-image-source: url("./../../../images/screen/crt_bezel.jpg");
   border-image-slice: 200 fill;
   border-image-outset: 0px;
   overflow: hidden;

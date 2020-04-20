@@ -1,12 +1,12 @@
-import React, { MouseEvent } from "react";
-import "./HomeScreenComponent.css";
+import React, { MouseEvent, FC } from "react";
+import "./css/homeScreenComponent.css";
 //import crtBezel from "../../public/images/screen/crt_bezel.jpg";
 
 interface HomeScreenProps {
-  title: string,
+  title: string
 };
 
-const HomeScreenComponent: React.SFC<HomeScreenProps> = (props: HomeScreenProps): JSX.Element => {
+const HomeScreenComponent: FC<HomeScreenProps> = (props: HomeScreenProps): JSX.Element => {
   const { title } = props;
 
   const handleClick = (e: MouseEvent) => {
