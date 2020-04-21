@@ -29,5 +29,6 @@
     "watch": [ "app" ],
     "exec": "npm start",
     "ext": "ts"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

@@ -1,5 +1,6 @@
 import express from "express";
 import http from "http";
+import path from "path";
 
 // custom middleware //
 import requestLogger from "./custom_middleware/requestLogger";
@@ -18,6 +19,15 @@ if (process.env.NODE_ENV !== "production") {
 combinedRoutes(Router);
 app.use(Router);
 // end router and routes configuration //
+// staic files configuration //
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.use(express.static(path.join(__dirname, "public")));
+} else {
+  app.use(express.static(path.join(__dirname, "client/src")));
+  app.use(express.static(path.join(__dirname, "public")));
+}
+// end static files configuration //
 
 server.listen(PORT, () => {
   console.log(`Listening at PORT: ${PORT}`);
