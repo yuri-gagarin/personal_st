@@ -1,23 +1,14 @@
-#mainMonitor {
-  position: absolute;
-  top: 0px;
-  right: 11.5px;
-  bottom: 0px;
-  left: 1.5px;
-  border: 13px solid rgb(0, 8, 2);
-  border-radius: 14px;
-  background-color: #e1eef6;
-  transform: translate(-50%, -50%);
-  content: " ";
-  overflow: hidden;
-  background: #16222A;
-  background: -webkit-linear-gradient(to left, #16222A , #3A6073);
-  background: linear-gradient(to left, #16222A , #3A6073);
-  background-size: cover;
-  background-image: url(https://cldup.com/gn3s3Fg75t.gif);
-  color:  #e1eef6;
+:root {
+	--green-color: #5bf870;
+	--green-bg: #05321e;
+	--red-color: #c0100a;
+	--red-bg: #1b0302;
+	--blue-color: #a5a5ff;
+	--blue-bg: #4242e7;
+	--off: #050505;
+	--dark: #111;
+	--term: "> ";
 }
-
 #mainMonitorBezel {
   position: relative;
   height: 80vh;
@@ -31,22 +22,77 @@
   z-index: 10;
 }
 
-#monitorCRT:before {
+#mainMonitor {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border: 13px solid rgb(0, 8, 2);
+  border-radius: 14px;
+  z-index: 2;
+  background: #1f2c23;
+}
+
+#monitorCRT {
+  position: relative;
+  height: 100%;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse, var(--bg) 0%, var(--off) 90%);
+  animation: turnOn 1s linear;
+}
+
+#monitorCRT:not(.off):before {
   content: " ";
   display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background: linear-gradient(
     to bottom,
-    rgba(3, 27, 13, 0.233) 50%,
+    rgba(18, 16, 16, 0.1) 50%,
     rgba(0, 0, 0, 0.25) 50%
   );
   background-size: 100% 8px;
-  z-index: 3;
+  z-index: 24;
   pointer-events: none;
+}
+#monitorCRT:after {
+  content: " ";
+  opacity: 0;
+  background: #fff;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+}
+/* Screen turned off */
+#monitorCRT.off {
+  background: var(--off);
+}
+#monitorCRT.on:after {
+  animation: turnOn 0.5s ease-in-out;
+}
+#monitorCRT.off:before {
+  background: none;
+}
+#monitorCRT.off * {
+  display: none !important;
+}
+#monitorCRT.off {
+  animation: turnOff 0.5s ease-in-out;
+  background: rgb(0, 0, 0) !important;
+}
+.on {
+  transition: background-color 1s linear;
 }
 
 .monitorScanline {
@@ -54,7 +100,7 @@
   bottom: 100%;
   width: 100%;
   height: 200px;
-  z-index: 6;
+  z-index: 20;
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 0)0%,
@@ -62,46 +108,54 @@
     rgba(0, 0, 0, 0.1) 100%
   );
   opacity: 0.5;
-  animation: monitorScanline 8s linear infinite;
+  animation: monitorScanline 4s linear infinite;
 }
 
 @keyframes monitorScanline {
   0% { bottom: 100%; }
   80% { bottom: 100%; }
-  100% { bottom: 0% }
+  100% { bottom: 0%; }
+}
+@keyframes turnOnBackground {
+  0% {
+    background: opacity(0);
+  }
+  66% {
+    background: opacity(0.25);
+  }
+  100% {
+    background: opacity(1);
+  }
+}
+@keyframes turnOn {
+  0% {
+    background: rgb(255, 255, 255) !important;
+    transform: scale(1.3, 0.001) translate3d(0, 0, 0);
+    animation-timing-function: ease-in;
+    -webkit-filter: brightness(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+  66% {
+    background:rgb(255, 255, 255) !important;
+		transform: scale(1, 0.1) translate3d(0, 0, 0);
+		-webkit-filter: brightness(10);
+    filter: brightness(5);
+    opacity: 1;
+  }
+  100% {
+    background: rgb(255, 255, 255) !important;
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    -webkit-filter: brightness(50);
+    filter: brightness(10);
+    opacity: 0.5;
+  }
 }
 
-button {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  padding: 20px;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-h1 {
-  text-align: center;
-}
-
-.screen {
-  background-color: #e1eef6;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  content: " ";
-  overflow: hidden;
-  background: #16222A;
-  background: -webkit-linear-gradient(to left, #16222A , #3A6073);
-  background: linear-gradient(to left, #16222A , #3A6073);
-  background-size: cover;
-  background-image: url(https://cldup.com/gn3s3Fg75t.gif);
-   color:  #e1eef6;
-}
-/* turn off animation for the CRT screen */
 @keyframes turnOff {
   0% {
     background: rgb(255, 255, 255) !important;
-    transform: scale(1, 1,13) translate3d(0, 0, 0);
+    transform: scale(1, 1.13) translate3d(0, 0, 0);
     -webkit-filter: brightness(1);
     filter: brightness(1);
     opacity: 1;

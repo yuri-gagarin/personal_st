@@ -1,26 +1,23 @@
 import React, { FC, useContext } from "react";
 import "./css/powerSwitchComponent.css";
 
-// 
-import { Store } from "./../../Store";
-
 interface PowerSwitchProps {
   title: string,
   powerOn: boolean,
-  togglePowerSwitch(): void
+  turnOnPowerSwitch(e: React.MouseEvent): void,
+  turnOffPowerSwitch(e: React.MouseEvent): void
 };
 
 const PowerSwitchComponent: FC<PowerSwitchProps> = (props: PowerSwitchProps): JSX.Element => {
-  const { title, powerOn = true, togglePowerSwitch } = props;
-  const { screenState } = useContext(Store);
+  const { title, powerOn, turnOnPowerSwitch, turnOffPowerSwitch} = props;
   if (powerOn) {
     return (
-      <div id="crtScreenOnSwitch" onClick={togglePowerSwitch}>
+      <div id="crtScreenOnSwitch" onClick={turnOffPowerSwitch}>
       </div>
     );
   } else {
     return (
-      <div id="crtScreenOffSwitch" onClick={togglePowerSwitch}>
+      <div id="crtScreenOffSwitch" onClick={turnOnPowerSwitch}>
 
       </div>
     );

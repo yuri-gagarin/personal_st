@@ -1,22 +1,23 @@
 import React, { MouseEvent, FC, useState, useContext } from "react";
 import "./css/homeScreenComponent.css";
 //import crtBezel from "../../public/images/screen/crt_bezel.jpg";
+import { Store } from "./../../Store";
 
 interface HomeScreenProps {
   title: string
 };
 
 const HomeScreenComponent: FC<HomeScreenProps> = (props: HomeScreenProps): JSX.Element => {
-  const { title } = props;
-  const on = true;
-  const handleClick = (e: MouseEvent) => {
+  const { screenState } = useContext(Store).state;
+  const { powerOn, title } = screenState;
+  const handleClick = (e: React.MouseEvent) => {
 
   };
 
   return (
     <div id="mainMonitorBezel">
       <div id="mainMonitor">
-        <div id="monitorCRT" className={`${on ? "turn-off off": "on"}` } onClick={handleClick}>
+        <div id="monitorCRT" className={`${powerOn ?  "on" : "turn-off off"}` } onClick={handleClick}>
         <div className="monitorScanline"></div>
         <div className="terminal"></div>
         </div>

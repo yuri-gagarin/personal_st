@@ -1,44 +1,51 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useContext, MouseEvent } from "react";
 import "./css/homeScreenControlls.css";
 // additional components //
 import PowerSwitchComponent from "./PowerSwitchComponent";
+import { Store } from "../../Store";
 
 const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
-  const [powerOn, setPowerOn] = useState(true);
+  // const [powerOn, setPowerOn] = useState(true);
+  const { state, dispatch } = useContext(Store);
+  const { screenState } = state;
   const [powerButtonSound, setPowerButtonSound] = useState<HTMLAudioElement>();
 
-  const togglePowerSwitch = (): void => {
+  const turnOnPowerSwitch = (e: React.MouseEvent): void => {
     if (powerButtonSound) {
       powerButtonSound.play();
-      setPowerOn(!powerOn);
+      dispatch({ type: "POWER_ON" });
     } else {
-      setPowerOn(!powerOn);
+      dispatch({ type: "POWER_ON" });
     }
   };
-  const turnOnSwitch = (powerButtonSound: HTMLAudioElement): Promise<boolean>  => {
-    return new Promise((resolve, reject) => {
-      if (powerButtonSound) {
-        setPowerOn(true);
-        powerButtonSound.play();
-        resolve(true);
-      } else {
-        reject(false);
-      }
-    });
-  }
+  const turnOffPowerSwitch = (e: React.MouseEvent): void => {
+    if (powerButtonSound) {
+      powerButtonSound.play();
+      dispatch({ type: "POWER_OFF" });
+    } else {
+      dispatch({ type: "POWER_OFF" });
+    }
+  };
+
   // lifecycle hooks //
   useEffect(() => {
     const powerButtonSound: HTMLAudioElement = new Audio("./../../media/sounds/keys/power_button.mp3");
-    console.log(powerButtonSound);
     setPowerButtonSound(powerButtonSound);
   }, []);
+  useEffect(() => {
+    if (powerButtonSound && !screenState.powerOn) {
+      powerButtonSound.play();
+      dispatch({ type: "POWER_ON" });
+    }
+  }, [powerButtonSound])
 
   return (
     <div id="crtControls">
       <PowerSwitchComponent 
-        powerOn={powerOn} 
         title={"My Retro TV"}
-        togglePowerSwitch={togglePowerSwitch}
+        powerOn={screenState.powerOn}
+        turnOnPowerSwitch={turnOnPowerSwitch}
+        turnOffPowerSwitch={turnOffPowerSwitch}
       />
     </div>
   );
