@@ -1,0 +1,8 @@
+.textCursor {
+  height: 100%;
+  width: 20px;
+  background-color: green;
+}
+.noColor {
+  visibility: hidden;
+}

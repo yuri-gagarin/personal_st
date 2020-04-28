@@ -2,6 +2,8 @@ import React, { MouseEvent, FC, useState, useContext } from "react";
 import "./css/homeScreenComponent.css";
 //import crtBezel from "../../public/images/screen/crt_bezel.jpg";
 import { Store } from "./../../Store";
+// additional components //
+import TerminalScreen from "./TerminalScreen";
 
 interface HomeScreenProps {
   title: string
@@ -19,7 +21,7 @@ const HomeScreenComponent: FC<HomeScreenProps> = (props: HomeScreenProps): JSX.E
       <div id="mainMonitor">
         <div id="monitorCRT" className={`${powerOn ?  "on" : "turn-off off"}` } onClick={handleClick}>
         <div className="monitorScanline"></div>
-        <div className="terminal"></div>
+        <TerminalScreen />
         </div>
       </div>
     </div>

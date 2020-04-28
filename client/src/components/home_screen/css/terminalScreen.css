@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css?family=VT323&display=swap");
+.textLine {
+  display: block;
+  width: 100%;
+  height: 35px;
+  position: relative;
+}
+.retroText {
+  font-family: "VT323", monospace;
+  height: 100%;
+  font-size: 25px;
+  color: rgb(78, 207, 78);
+  display: flex;
+  align-items: center;
+  float: left;
+  justify-content: center;
+}
+.retroText::after {
+  content: "";
+  width: 10px;
+  height: 100%;
+}
+.retroText::before {
+  content: "";
+  width: 10px;
+  height: 100%;
+}
+.retroText > h3 {
+  background-color: fuchsia;
+  height: 100%;
+}
+.cursor {
+  height: 100%;
+  width: 20px;
+  float: left;
+}
