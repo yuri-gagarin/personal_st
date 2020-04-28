@@ -97,3 +97,26 @@ h1 {
   background-image: url(https://cldup.com/gn3s3Fg75t.gif);
    color:  #e1eef6;
 }
+/* turn off animation for the CRT screen */
+@keyframes turnOff {
+  0% {
+    background: rgb(255, 255, 255) !important;
+    transform: scale(1, 1,13) translate3d(0, 0, 0);
+    -webkit-filter: brightness(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+  60% {
+    background:rgb(255, 255, 255) !important;
+		transform: scale(1.3, 0.001) translate3d(0, 0, 0);
+		-webkit-filter: brightness(10);
+		filter: brightness(10);
+  }
+  100% {
+    background: rgb(255, 255, 255) !important;
+    animation-timing-function: ease-out;
+    transform: scale(0, 0.0001) translate3d(0, 0, 0);
+    -webkit-filter: brightness(50);
+    filter: brightness(50);
+  }
+}

@@ -15,6 +15,17 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
       setPowerOn(!powerOn);
     }
   };
+  const turnOnSwitch = (powerButtonSound: HTMLAudioElement): Promise<boolean>  => {
+    return new Promise((resolve, reject) => {
+      if (powerButtonSound) {
+        setPowerOn(true);
+        powerButtonSound.play();
+        resolve(true);
+      } else {
+        reject(false);
+      }
+    });
+  }
   // lifecycle hooks //
   useEffect(() => {
     const powerButtonSound: HTMLAudioElement = new Audio("./../../media/sounds/keys/power_button.mp3");

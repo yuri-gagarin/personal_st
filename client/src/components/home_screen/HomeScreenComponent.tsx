@@ -1,4 +1,4 @@
-import React, { MouseEvent, FC } from "react";
+import React, { MouseEvent, FC, useState, useContext } from "react";
 import "./css/homeScreenComponent.css";
 //import crtBezel from "../../public/images/screen/crt_bezel.jpg";
 
@@ -8,7 +8,7 @@ interface HomeScreenProps {
 
 const HomeScreenComponent: FC<HomeScreenProps> = (props: HomeScreenProps): JSX.Element => {
   const { title } = props;
-
+  const on = true;
   const handleClick = (e: MouseEvent) => {
 
   };
@@ -16,7 +16,7 @@ const HomeScreenComponent: FC<HomeScreenProps> = (props: HomeScreenProps): JSX.E
   return (
     <div id="mainMonitorBezel">
       <div id="mainMonitor">
-        <div id="monitorCRT" onClick={handleClick}>
+        <div id="monitorCRT" className={`${on ? "turn-off off": "on"}` } onClick={handleClick}>
         <div className="monitorScanline"></div>
         <div className="terminal"></div>
         </div>
