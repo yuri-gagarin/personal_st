@@ -1,5 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import "./css/powerSwitchComponent.css";
+
+// 
+import { Store } from "./../../Store";
 
 interface PowerSwitchProps {
   title: string,
@@ -9,6 +12,7 @@ interface PowerSwitchProps {
 
 const PowerSwitchComponent: FC<PowerSwitchProps> = (props: PowerSwitchProps): JSX.Element => {
   const { title, powerOn = true, togglePowerSwitch } = props;
+  const { screenState } = useContext(Store);
   if (powerOn) {
     return (
       <div id="crtScreenOnSwitch" onClick={togglePowerSwitch}>
