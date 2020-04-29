@@ -1,0 +1,9 @@
+.terminalTextLine {
+  border: 2px solid red;
+  padding-left: 2px;
+}
+
+.textCharacter {
+  padding-left: 2px;
+  padding-right: 2px;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./css/blinkingCursor.css";
 
-const useInterval = (callback: (n: any) => any, delay: number): void => {
+const useInterval = (callback: (n: any) => void, delay: number): void => {
   const savedCallback = useRef<any>();
   useEffect(() => {
     savedCallback.current = callback;
@@ -27,7 +27,6 @@ const BlinkingCursor: React.FC<{}> = (props): JSX.Element => {
   }, 500);
 
   useEffect(() => {
-    console.log(blinker);
   }, [blinker]);
 
   return (

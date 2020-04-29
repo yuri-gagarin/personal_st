@@ -2,6 +2,7 @@ import React from "react";
 // initial state interfaces //
 interface ScreenState {
   powerOn: boolean,
+  screenLoaded: boolean,
   title: string
 };
 interface UserState {
@@ -23,6 +24,7 @@ interface AppContext {
 const initialState: AppState = {
   screenState: {
     powerOn: false,
+    screenLoaded: false,
     title: "Main Screen"
   },
   userState: {
@@ -52,6 +54,15 @@ export const screenReducer = (state: AppState, action: AppAction): AppState => {
         screenState: {
           ...state.screenState,
           powerOn: true,
+        }
+      };
+    };
+    case "SCREEN_LOADED": {
+      return {
+        ...state,
+        screenState: {
+          ...state.screenState,
+          screenLoaded: true
         }
       };
     };
