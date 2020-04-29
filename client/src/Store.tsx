@@ -66,6 +66,15 @@ export const screenReducer = (state: AppState, action: AppAction): AppState => {
         }
       };
     };
+    case "SCREEN_UNLOADED": {
+      return {
+        ...state,
+        screenState: {
+          ...state.screenState,
+          screenLoaded: false
+        }
+      };;
+    }
     default: {
       return state;
     };

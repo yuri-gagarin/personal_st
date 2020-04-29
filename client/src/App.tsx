@@ -20,7 +20,6 @@ const App: React.FC = (props: any): JSX.Element => {
   const store = React.useContext(Store);
   return (
     <div className="App">
-      {console.log(store)}
       <HomeScreenComponent
         title="Home Screen"
       />

@@ -10,9 +10,6 @@ const TerminalScreen: React.FC<{}> = (props): JSX.Element => {
       <div className="retroText">
         <TerminalTextLine text={"Hello There"} />
       </div>
-      <div className="cursor">
-        <BlinkingCursor />
-      </div>
     </div>
   )
 };

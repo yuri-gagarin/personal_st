@@ -2,6 +2,9 @@
   height: 100%;
   width: 20px;
   background-color: green;
+  position: absolute;
+  right: -20px;
+  top: 0px;
 }
 .noColor {
   visibility: hidden;

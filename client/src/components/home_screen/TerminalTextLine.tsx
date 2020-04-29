@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 // css imports //
 import "./css/terminalTextLine.css";
+import { Store } from "../../Store";
+// additional components //
+import BlinkingCursor from './BlinkingCursor';
+import axios from 'axios';
 
 const useInterval = (callback: (n: any) => void, delay: number, limit: number, ticks: React.MutableRefObject<number>): void => {
   const savedCallback = useRef<any>();
@@ -28,23 +32,31 @@ interface LineProps {
 const TerminalTextLine: React.FC<LineProps> = (props): JSX.Element => {
   const { text } = props;
   const [ lineText, setLineText ] = useState<string[]>([]);
-  const [ lineTextTiming, setLineTextTiming ] = useState<number>();
-  const [ letterInterval, setLetterInterval ] = useState<NodeJS.Timeout>();
+  const [ typeSound, setTypeSound ] = useState<HTMLAudioElement>()
+  const { dispatch, state } = useContext(Store);
+  const { screenLoaded } = state.screenState;
   const tickLimit = useRef<number>(0);
 
   useEffect(() => {
+    setTypeSound(() => {
+
+      return new Audio("/public")
+    })
+  },[]);
+  useEffect(() => {
     console.log(tickLimit.current);
-    if (text[tickLimit.current]) {
-      setTimeout(() => {
-        setLineText(() => {
-          return [...lineText].concat(text[tickLimit.current])
-        })
-        tickLimit.current += 1;
-      }, 200);
+    if (screenLoaded) {
+      if (text[tickLimit.current]) {
+        setTimeout(() => {
+          setLineText(() => {
+            return [...lineText].concat(text[tickLimit.current])
+          })
+          tickLimit.current += 1;
+        }, 200);
+      }
     }
-  }, [lineText]);
+  }, [lineText, screenLoaded]);
   //useInterval(tickFunction, 1000, text.length, tickLimit)
-  
   return (
     <div className="terminalTextLine">
       {
@@ -56,6 +68,7 @@ const TerminalTextLine: React.FC<LineProps> = (props): JSX.Element => {
           );
         })
       }
+      <BlinkingCursor />
     </div>
   );
 };

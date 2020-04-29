@@ -4,26 +4,37 @@ import "./css/homeScreenControlls.css";
 import PowerSwitchComponent from "./PowerSwitchComponent";
 import { Store } from "../../Store";
 
+
 const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
   // const [powerOn, setPowerOn] = useState(true);
   const { state, dispatch } = useContext(Store);
   const { screenState } = state;
   const [powerButtonSound, setPowerButtonSound] = useState<HTMLAudioElement>();
 
+  const dispatchWithTimeout = (action: string, delay: number): void => {
+    setTimeout(() => {
+      dispatch({ type: action });
+    }, delay);
+  };
+ 
   const turnOnPowerSwitch = (e: React.MouseEvent): void => {
     if (powerButtonSound) {
       powerButtonSound.play();
       dispatch({ type: "POWER_ON" });
+      dispatchWithTimeout("SCREEN_LOADED", 1000);
     } else {
       dispatch({ type: "POWER_ON" });
+      dispatchWithTimeout("SCREEN_LOADED", 1000);
     }
   };
   const turnOffPowerSwitch = (e: React.MouseEvent): void => {
     if (powerButtonSound) {
       powerButtonSound.play();
       dispatch({ type: "POWER_OFF" });
+      dispatchWithTimeout("SCREEN_UNLOADED", 500);
     } else {
       dispatch({ type: "POWER_OFF" });
+      dispatchWithTimeout("SCREEN_UNLOADED", 500);
     }
   };
 
