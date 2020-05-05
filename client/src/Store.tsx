@@ -1,22 +1,24 @@
 import React from "react";
 // initial state interfaces //
-interface ScreenState {
+export interface ScreenState {
   powerOn: boolean,
   screenLoaded: boolean,
-  title: string
+  title: string,
+  greeting: string,
+  instructions: string[]
 };
-interface UserState {
+export interface UserState {
   name: string
 };
-interface AppState {
+export interface AppState {
   screenState: ScreenState,
   userState: UserState
 };
-interface AppAction {
+export interface AppAction {
   type: string,
   payload: any
 };
-interface AppContext {
+export interface AppContext {
   state: AppState,
   dispatch: any
 };
@@ -25,7 +27,9 @@ const initialState: AppState = {
   screenState: {
     powerOn: false,
     screenLoaded: false,
-    title: "Main Screen"
+    title: "",
+    greeting: "",
+    instructions: []
   },
   userState: {
     name: "Guest"
@@ -37,6 +41,37 @@ const initialContext: AppContext = {
   dispatch: null
 };
 
+export const userReducer = (state: AppState, action: AppAction): AppState => {
+  switch (action.type) {
+    case "SET_GUEST": {
+      return {
+        ...state,
+        userState: {
+          ...state.userState,
+          name: action.payload.name
+        }
+      };
+    };
+    case "SET_ADMIN": {
+      return {
+        ...state,
+        userState: {
+          ...state.userState,
+          name: "Administrator"
+        }
+      };
+    };
+    case "SAVE_GUEST": {
+      return {
+        ...state,
+        userState: {
+          ...action.payload
+        }
+      };
+    };
+    default: return state
+  }
+};
 export const screenReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
     case "POWER_OFF": {
@@ -74,20 +109,24 @@ export const screenReducer = (state: AppState, action: AppAction): AppState => {
           screenLoaded: false
         }
       };;
-    }
-    default: {
-      return state;
     };
-  }
-};
-
-export const userReducer = (state: AppState, action: AppAction): AppState => {
-  switch (action.type) {
-    case "RGEISTER_GUEST": {
+    case "SET_GREETING": {
       return {
         ...state,
-        userState: {
-          name: action.payload
+        screenState: {
+          ...state.screenState,
+          greeting: action.payload.greeting,
+          instructions: [...action.payload.instructions]
+        }
+      };
+    };
+    case "CLEAR_GREETING": {
+      return {
+        ...state,
+        screenState: {
+          ...state.screenState,
+          greeting: action.payload.greeting,
+          instructions: [...action.payload.instructions]
         }
       };
     };

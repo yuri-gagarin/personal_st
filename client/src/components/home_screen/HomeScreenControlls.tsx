@@ -4,6 +4,19 @@ import "./css/homeScreenControlls.css";
 import PowerSwitchComponent from "./PowerSwitchComponent";
 import { Store } from "../../Store";
 
+interface InitialGreeting {
+  greeting: string,
+  instructions: string[]
+};
+
+const greeting: InitialGreeting = {
+  greeting: "Hello there and welcome...",
+  instructions: [
+    "Please enter your name",
+    "Or",
+    "Please select option"
+  ]
+};
 
 const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
   // const [powerOn, setPowerOn] = useState(true);
@@ -21,9 +34,11 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
     if (powerButtonSound) {
       powerButtonSound.play();
       dispatch({ type: "POWER_ON" });
+      dispatch({ type: "SET_GREETING", payload: greeting });
       dispatchWithTimeout("SCREEN_LOADED", 1000);
     } else {
       dispatch({ type: "POWER_ON" });
+      dispatch({ type: "SET_GREETING", payload: greeting });
       dispatchWithTimeout("SCREEN_LOADED", 1000);
     }
   };
@@ -31,9 +46,11 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
     if (powerButtonSound) {
       powerButtonSound.play();
       dispatch({ type: "POWER_OFF" });
+      dispatch({ type: "CLEAR_GREETING" });
       dispatchWithTimeout("SCREEN_UNLOADED", 500);
     } else {
       dispatch({ type: "POWER_OFF" });
+      dispatch({ type: "CLEAR_GREETING" });
       dispatchWithTimeout("SCREEN_UNLOADED", 500);
     }
   };
