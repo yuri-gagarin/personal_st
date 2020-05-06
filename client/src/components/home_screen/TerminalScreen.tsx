@@ -1,7 +1,6 @@
 import React from "react";
 import "./css/terminalScreen.css";
 
-import BlinkingCursor from "./BlinkingCursor";
 import TerminalTextLine from "./TerminalTextLine";
 
 const TerminalScreen: React.FC<{}> = (props): JSX.Element => {

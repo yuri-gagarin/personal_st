@@ -1,7 +1,7 @@
-import React, { MouseEvent, FC, useState, useContext } from "react";
+import React, { FC, useContext } from "react";
 import "./css/homeScreenComponent.css";
 //import crtBezel from "../../public/images/screen/crt_bezel.jpg";
-import { Store } from "./../../Store";
+import { Store, AppState } from "../../state/Store";
 // additional components //
 import TerminalScreen from "./TerminalScreen";
 
@@ -10,12 +10,14 @@ interface HomeScreenProps {
 };
 
 const HomeScreenComponent: FC<HomeScreenProps> = (props: HomeScreenProps): JSX.Element => {
-  const { screenState } = useContext(Store).state;
-  const { powerOn, title } = screenState;
+  const appState: AppState = useContext(Store);
+  console.log(appState);
+  const { powerOn } = appState.screenState;
   const handleClick = (e: React.MouseEvent) => {
 
   };
 
+  console.log(" power is " + powerOn)
   return (
     <div id="mainMonitorBezel">
       <div id="mainMonitor">

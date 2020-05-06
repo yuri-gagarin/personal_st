@@ -1,30 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 // css imports //
 import "./css/terminalTextLine.css";
-import { Store } from "../../Store";
+import { Store, AppState } from "../../state/Store";
 // additional components //
 import BlinkingCursor from './BlinkingCursor';
-import axios, { AxiosRequestConfig } from 'axios';
 
-const useInterval = (callback: (n: any) => void, delay: number, limit: number, ticks: React.MutableRefObject<number>): void => {
-  const savedCallback = useRef<any>();
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  useEffect(() => {
-    function tick (): void {
-      savedCallback.current();
-      ticks.current += 1;
-      console.log(ticks.current)
-    }
-    if (delay !== null) {
-      let id: NodeJS.Timeout = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-    console.log(ticks.current);
-  }, [delay, ticks.current])
-}
 interface LineProps {
   text: string
 };
@@ -33,8 +13,8 @@ const TerminalTextLine: React.FC<LineProps> = (props): JSX.Element => {
   const { text } = props;
   const [ lineText, setLineText ] = useState<string[]>([]);
   const [ typeSound, setTypeSound ] = useState<HTMLAudioElement>()
-  const { dispatch, state } = useContext(Store);
-  const { screenLoaded } = state.screenState;
+  const appState: AppState = useContext(Store);
+  const { screenLoaded } = appState.screenState;
   const tickLimit = useRef<number>(0);
 
   useEffect(() => {

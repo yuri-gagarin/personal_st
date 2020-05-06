@@ -4,7 +4,7 @@ export const userActionConstants = {
   SET_ADMIN: "SET_ADMIN"
 };
 
-export const screenActionConsants = {
+export const screenActionConstants = {
   POWER_OFF: "POWER_OFF",
   POWER_ON: "POWER_ON",
   SCREEN_LOADED: "SCREEN_LOADED",
