@@ -1,8 +1,8 @@
 import React, { useReducer } from "react";
 // initial state interfaces and types //
 import { indexReducer, rootState } from "./reducers/indexReducer";
-import { ScreenAction, ScreenState } from "./reducers/screenReducer";
-import { UserAction, UserState } from "./reducers/userReducer";
+import { ScreenAction, ScreenState, initialScreenState } from "./reducers/screenReducer";
+import { UserAction, UserState, initialUserState } from "./reducers/userReducer";
 
 //
 export type AppAction = ScreenAction | UserAction;
@@ -14,18 +14,22 @@ export type GlobalAppState = {
 type CombinedReducer = (state: GlobalAppState, action: AppAction) => GlobalAppState;
 
 type GlobalContext = {
-  state: GlobalAppState | {},
-  dispatch: React.Dispatch<AppAction> | null
-}
+  state: GlobalAppState,
+  dispatch: React.Dispatch<AppAction> 
+};
 
 const initialContext: GlobalContext = {
-  state: {},
-  dispatch: null
-}
+  state: {
+    screenState: { ...initialScreenState },
+    userState: { ...initialUserState }
+  },
+  dispatch: (value: AppAction): void => {}
+};
+
 export const Store = React.createContext<GlobalContext>(initialContext);
 
 export const StoreProvider = (props: any): JSX.Element => {
-  const [ globalState, dispatch ] = useReducer<CombinedReducer>(indexReducer, rootState);
+  const [ globalState, dispatch ] = useReducer<CombinedReducer>(indexReducer, rootState as GlobalAppState);
   return (
     <Store.Provider value={{ state: globalState, dispatch: dispatch }}>
       {props.children}

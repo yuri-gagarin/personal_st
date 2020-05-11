@@ -1,18 +1,18 @@
 type PowerOn = {
   readonly type: "POWER_ON",
-  readonly payload: {} | null
+  readonly payload: {}
 };
 type PowerOff = {
   readonly type: "POWER_OFF",
-  readonly payload: {} | null
+  readonly payload: {}
 };
 type ScreenLoaded = {
   readonly type: 'SCREEN_LOADED',
-  readonly payload: {} | null
+  readonly payload: {} 
 };
 type ScreenUnloaded = {
   readonly type: "SCREEN_UNLOADED",
-  readonly payload: {} | null
+  readonly payload: {}
 };
 type SetGreeting = {
   readonly type: "SET_GREETING",
