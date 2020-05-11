@@ -1,4 +1,3 @@
-import { AppState } from "./../Store";
 
 type PowerOn = {
   readonly type: "POWER_ON",
@@ -33,61 +32,57 @@ type ClearGreeting = {
   }
 };
 
-type ScreenAction = PowerOn | PowerOff | ScreenLoaded | ScreenUnloaded | SetGreeting | ClearGreeting;
+export interface ScreenState {
+  powerOn: boolean,
+  screenLoaded: boolean,
+  title: string,
+  greeting: string,
+  instructions: string[]
+};
 
+export const initialScreenState: ScreenState = {
+  powerOn: false,
+  screenLoaded: false,
+  title: "",
+  greeting: "",
+  instructions: []
+};
 
-const screenReducer = (state: AppState, action: ScreenAction): AppState => {
+export type ScreenAction = PowerOn | PowerOff | ScreenLoaded | ScreenUnloaded | SetGreeting | ClearGreeting;
+
+const screenReducer = (state:ScreenState, action: ScreenAction): ScreenState => {
   switch (action.type) {
     case "POWER_ON": 
-      console.log("calling power on")
       return {
         ...state,
-        screenState: {
-          ...state.screenState,
-          powerOn: true
-        }
-      };
+        powerOn: true
+      };  
     case "POWER_OFF": 
       return {
         ...state,
-        screenState: {
-          ...state.screenState,
-          powerOn: false,
-        }
+        powerOn: false,
       };
     case "SCREEN_LOADED": 
       return {
         ...state,
-        screenState: {
-          ...state.screenState,
-          screenLoaded: true
-        }
+        screenLoaded: true
       };
     case "SCREEN_UNLOADED": 
       return {
         ...state,
-        screenState: {
-          ...state.screenState,
-          screenLoaded: false
-        }
+        screenLoaded: false
       };
     case "SET_GREETING": 
       return {
         ...state,
-        screenState: {
-          ...state.screenState,
           greeting: action.payload.greeting,
           instructions: [...action.payload.instructions]
-        }
       };
     case "CLEAR_GREETING": 
       return {
         ...state,
-        screenState: {
-          ...state.screenState,
           greeting: action.payload.greeting,
           instructions: [...action.payload.instructions]
-        }
       };
     default: 
       return state;

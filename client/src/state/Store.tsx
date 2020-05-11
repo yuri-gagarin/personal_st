@@ -33,46 +33,13 @@ const initialState: AppState = {
   }
 };
 
-/*
-export const userReducer = (state: AppState, action: AppAction): AppState => {
-  switch (action.type) {
-    case "SET_GUEST": {
-      return {
-        ...state,
-        userState: {
-          ...state.userState,
-          name: action.payload.name
-        }
-      };
-    };
-    case "SET_ADMIN": {
-      return {
-        ...state,
-        userState: {
-          ...state.userState,
-          name: "Administrator"
-        }
-      };
-    };
-    case "SAVE_GUEST": {
-      return {
-        ...state,
-        userState: {
-          ...action.payload
-        }
-      };
-    };
-    default: return state
-  }
-}
-*/
-
 
 export const Store = React.createContext<AppState>(initialState);
 
 export const StoreProvider = (props: any): JSX.Element => {
   return (
-    <Store.Provider value={initialState}>
+    <Store.Provider value={{ ...initialState }}>
+      { console.log("called") }
       {props.children}
     </Store.Provider>
   )

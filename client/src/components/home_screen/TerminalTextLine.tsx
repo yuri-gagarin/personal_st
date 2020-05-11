@@ -38,7 +38,7 @@ const TerminalTextLine: React.FC<LineProps> = (props): JSX.Element => {
         }, 300);
       }
     }
-  }, [lineText, screenLoaded]);
+  }, [lineText, screenLoaded, text, typeSound]);
   //useInterval(tickFunction, 1000, text.length, tickLimit)
 
   return (
