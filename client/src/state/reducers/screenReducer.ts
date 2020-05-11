@@ -1,4 +1,3 @@
-
 type PowerOn = {
   readonly type: "POWER_ON",
   readonly payload: {} | null

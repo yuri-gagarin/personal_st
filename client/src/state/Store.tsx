@@ -1,45 +1,33 @@
-import React from "react";
-// initial state interfaces //
-export interface ScreenState {
-  powerOn: boolean,
-  screenLoaded: boolean,
-  title: string,
-  greeting: string,
-  instructions: string[]
-};
-export interface UserState {
-  name: string
-};
-export interface AppState {
+import React, { useReducer } from "react";
+// initial state interfaces and types //
+import { indexReducer, rootState } from "./reducers/indexReducer";
+import { ScreenAction, ScreenState } from "./reducers/screenReducer";
+import { UserAction, UserState } from "./reducers/userReducer";
+
+//
+export type AppAction = ScreenAction | UserAction;
+//
+export type GlobalAppState = {
   screenState: ScreenState,
   userState: UserState
-};
-export interface AppAction {
-  type: string,
-  payload: any
-};
+}
+type CombinedReducer = (state: GlobalAppState, action: AppAction) => GlobalAppState;
 
-// initialization of default app state //
-const initialState: AppState = {
-  screenState: {
-    powerOn: false,
-    screenLoaded: false,
-    title: "",
-    greeting: "",
-    instructions: []
-  },
-  userState: {
-    name: "Guest"
-  }
-};
+type GlobalContext = {
+  state: GlobalAppState | {},
+  dispatch: React.Dispatch<AppAction> | null
+}
 
-
-export const Store = React.createContext<AppState>(initialState);
+const initialContext: GlobalContext = {
+  state: {},
+  dispatch: null
+}
+export const Store = React.createContext<GlobalContext>(initialContext);
 
 export const StoreProvider = (props: any): JSX.Element => {
+  const [ globalState, dispatch ] = useReducer<CombinedReducer>(indexReducer, rootState);
   return (
-    <Store.Provider value={{ ...initialState }}>
-      { console.log("called") }
+    <Store.Provider value={{ state: globalState, dispatch: dispatch }}>
       {props.children}
     </Store.Provider>
   )
