@@ -13,6 +13,7 @@ const TerminalTextLine: React.FC<LineProps> = (props): JSX.Element => {
   const { text } = props;
   const [ lineText, setLineText ] = useState<string[]>([]);
   const [ typeSound, setTypeSound ] = useState<HTMLAudioElement>()
+  const [ typingDone, setTypingDone ] = useState(false);
   const { state } = useContext(Store);
   const { screenState } = state;
   const { screenLoaded } = screenState;
@@ -41,6 +42,7 @@ const TerminalTextLine: React.FC<LineProps> = (props): JSX.Element => {
     }
     if ((lineText.length > 0 && text.length) > 0 && (lineText.length === text.length)) {
       console.log("done");
+      setTypingDone(true);
     }
   }, [lineText, screenLoaded, text, typeSound]);
   //useInterval(tickFunction, 1000, text.length, tickLimit)
@@ -62,7 +64,9 @@ const TerminalTextLine: React.FC<LineProps> = (props): JSX.Element => {
           );
         })
       }
-      <BlinkingCursor />
+      {
+        !typingDone ? <BlinkingCursor /> : null
+      }
       <audio className="keystrokeSoundTerminal">
         <source src="/media/sounds/keys/keystroke.wav"></source>
       </audio>
