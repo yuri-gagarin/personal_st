@@ -18,7 +18,7 @@ type SetGreeting = {
   readonly type: "SET_GREETING",
   readonly payload: {
     title: string,
-    greeting: string,
+    greeting: string[],
     instructions: string[]
   }
 };
@@ -26,7 +26,7 @@ type ClearGreeting = {
   readonly type: "CLEAR_GREETING",
   readonly payload: {
     title: string,
-    greeting: string,
+    greeting: string[],
     instructions: string[]
   }
 };
@@ -35,7 +35,7 @@ export interface ScreenState {
   powerOn: boolean,
   screenLoaded: boolean,
   title: string,
-  greeting: string,
+  greeting: string[],
   instructions: string[]
 };
 
@@ -43,7 +43,7 @@ export const initialScreenState: ScreenState = {
   powerOn: false,
   screenLoaded: false,
   title: "",
-  greeting: "",
+  greeting: [""],
   instructions: []
 };
 
@@ -80,7 +80,7 @@ const screenReducer = (state:ScreenState, action: ScreenAction): ScreenState => 
     case "CLEAR_GREETING": 
       return {
         ...state,
-          greeting: action.payload.greeting,
+          greeting: [],
           instructions: [...action.payload.instructions]
       };
     default: 
