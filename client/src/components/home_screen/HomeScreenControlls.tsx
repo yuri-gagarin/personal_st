@@ -64,14 +64,16 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    /*
+    
     if (powerButtonSound && !screenState.powerOn) {
-      powerButtonSound.play();
-      dispatch({ type: "POWER_ON", payload: null });
-      dispatch({ type: "SET_GREETING", payload: greeting });
-      dispatchWithTimeout("SCREEN_LOADED", null, 1000);
+      setTimeout(() => {
+        powerButtonSound.play();
+        dispatch({ type: "POWER_ON", payload: {} });
+        dispatch({ type: "SET_GREETING", payload: greeting });
+        dispatchWithTimeout("SCREEN_LOADED", null, 1000);
+      }, 1000);
+     
     }
-    */
   }, [powerButtonSound])
 
   return (

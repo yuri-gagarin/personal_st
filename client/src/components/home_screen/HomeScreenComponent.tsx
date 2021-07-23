@@ -1,5 +1,5 @@
 import React, { FC, useContext } from "react";
-import "./css/homeScreenComponent.css";
+import styles from "./css/homeScreenComponent.module.css";
 //import crtBezel from "../../public/images/screen/crt_bezel.jpg";
 import { Store } from "../../state/Store";
 // additional components //
@@ -18,12 +18,12 @@ const HomeScreenComponent: FC<HomeScreenProps> = (props: HomeScreenProps): JSX.E
 
   return (
     <React.Fragment>
-      <div id="mainMonitorBezel">
-        <div id="mainMonitor">
-          <div id="monitorCRT" className={`${screenState.powerOn ?  "on" : "turn-off off"}` } onClick={handleClick}>
-          <div className="monitorScanline"></div>
-          <TerminalScreen />
-          </div>
+      <div className={ styles.mainMonitorBezel }>
+        <div className={ styles.mainMonitor }>
+          <div className={`${styles.monitorCRT} ${screenState.powerOn ? styles.on : styles.off}` } onClick={handleClick}>
+            <div className={ styles.monitorScanline }></div>
+            <TerminalScreen />
+            </div>
         </div>
       </div>
     </React.Fragment>

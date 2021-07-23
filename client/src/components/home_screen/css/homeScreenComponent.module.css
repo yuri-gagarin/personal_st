@@ -9,7 +9,8 @@
 	--dark: #111;
 	--term: "> ";
 }
-#mainMonitorBezel {
+
+.mainMonitorBezel {
   position: relative;
   height: 80vh;
   border-top: 5px solid transparent;
@@ -22,27 +23,34 @@
   z-index: 10;
 }
 
-#mainMonitor {
+.mainMonitor {
   position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
+  /*
   border: 13px solid rgb(0, 8, 2);
+  */
   border-radius: 14px;
   z-index: 2;
   background: #1f2c23;
+  border: 3px solid green;
 }
 
-#monitorCRT {
-  position: relative;
-  height: 100%;
+.monitorCRT {
+  display: flex;
+  position: absolute;
   background: var(--bg);
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;;
   background-image: radial-gradient(ellipse, var(--bg) 0%, var(--off) 90%);
   animation: turnOn 1s linear;
 }
 
-#monitorCRT:not(.off):before {
+.monitorCRT:not(.off):before {
   content: " ";
   display: block;
   position: absolute;
@@ -59,7 +67,7 @@
   z-index: 24;
   pointer-events: none;
 }
-#monitorCRT:after {
+.monitorCRT:after {
   content: " ";
   opacity: 0;
   background: #fff;
@@ -75,19 +83,19 @@
   z-index: 20;
 }
 /* Screen turned off */
-#monitorCRT.off {
+.monitorCRT.off {
   background: var(--off);
 }
-#monitorCRT.on:after {
+.monitorCRT.on:after {
   animation: turnOn 0.5s ease-in-out;
 }
-#monitorCRT.off:before {
+.monitorCRT.off:before {
   background: none;
 }
-#monitorCRT.off * {
+.monitorCRT.off * {
   display: none !important;
 }
-#monitorCRT.off {
+.monitorCRT.off {
   animation: turnOff 0.5s ease-in-out;
   background: rgb(0, 0, 0) !important;
 }
