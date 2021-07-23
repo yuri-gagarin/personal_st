@@ -6,11 +6,12 @@ import { Store } from "../../state/Store";
 import BlinkingCursor from './BlinkingCursor';
 
 interface LineProps {
-  text: string
+  text: string;
 };
 
 const TerminalTextLine: React.FC<LineProps> = (props): JSX.Element => {
   const { text } = props;
+  // local state //
   const [ lineText, setLineText ] = useState<string[]>([]);
   const [ typeSound, setTypeSound ] = useState<HTMLAudioElement>()
   const [ typingDone, setTypingDone ] = useState(false);
