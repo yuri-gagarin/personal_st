@@ -42,10 +42,12 @@ const TerminalText: React.FC<TerminalTextProps> = ({ active, index, text, markLi
   return (
     <div className={ styles.terminalText }>
       {
-        typedText.map((char, i) => {
-          return <span key={ `needBetterOneHere${i}`}>{ char }</span>
-        })
+        typedText.map((char, i) => <span key={ `needBetterOneHere${i}`}>{ char }</span> )
       }
+      {
+        active ? <span className={ styles.blinker }></span> : null
+      }
+      
     </div>
   )
 }
