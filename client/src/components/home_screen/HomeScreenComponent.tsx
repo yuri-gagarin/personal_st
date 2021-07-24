@@ -3,7 +3,7 @@ import styles from "./css/homeScreenComponent.module.css";
 //import crtBezel from "../../public/images/screen/crt_bezel.jpg";
 import { Store } from "../../state/Store";
 // additional components //
-import TerminalScreen from "./TerminalScreen";
+import TerminalScreen from "../terminal_screen/TerminalScreen";
 
 interface HomeScreenProps {
   title: string
