@@ -3,6 +3,7 @@ import "./css/homeScreenControlls.css";
 // additional components //
 import PowerSwitchComponent from "./PowerSwitchComponent";
 import { Store } from "../../state/Store";
+import { ModernClassicSwitch } from "../switches/ModernClassicSwitch";
 
 interface InitialGreeting {
   title: string,
@@ -88,6 +89,7 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
         turnOnPowerSwitch={turnOnPowerSwitch}
         turnOffPowerSwitch={turnOffPowerSwitch}
       />
+      <ModernClassicSwitch />
     </div>
   );
 };

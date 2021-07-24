@@ -11,22 +11,3 @@
   padding-right: 2px;
   font-weight: bold;
 }
-
-.terminalText {
-  text-align: left;
-}
-.terminalText > span {
-  padding: 0 5px;
-}
-.blinker {
-  height: 100%;
-  width: 20px;
-  background-color: green;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0% { opacity: 100%; }
-  50% { opacity: 0%; }
-  100% { opacity: 100%; }
-}
