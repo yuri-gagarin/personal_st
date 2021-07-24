@@ -2,7 +2,7 @@
   display: flex;
   position: absolute;
   left: 50%;
-  top: 30px;
+  top: 10px;
   transform: translate(-50%, 0%);
 }
 
@@ -17,7 +17,8 @@
   width: 150px;
   height: 50px;
   overflow: hidden;
-  border-bottom: 0.5em solid #eee;
+  border-bottom: 0.5em solid #2346b9;
+  border-radius: 5px;
 }
 .switchRocker::before {
   content: "";
@@ -27,7 +28,8 @@
   right: 0;
   bottom: 0;
   background-color: #999;
-  border: 0.5em solid #eee;
+  border: 0.5em solid #2346b9;
+  border-radius: 5px 5px 0 0;
   border-bottom: 0;
 }
 .switchRocker input {
@@ -58,8 +60,7 @@
 .switchRight {
   right: 0.5em;
   bottom: 0;
-  background-color: #bd5757;
-  color: #fff;
+  background-color: black;
 }
 
 .switchLeft::before, .switchRight::before {
@@ -125,4 +126,28 @@ input:focus + .switchLeft + .switchRight {
 
 input:checked:focus + .switchLeft + .switchRight {
   color: #333;
+}
+
+
+/* neon classic text effects */
+.classicText {
+  font-family: 'Tourney', cursive;;
+  color: #2346b9;
+  font-size: 15px;
+  text-shadow: 0 0 3px #2356FF;
+  animation: flux 2s linear infinite;
+  -moz-animation: flux 2s linear infinite;
+  -webkit-animation: flux 2s linear infinite;
+  -o-animation: flux 2s linear infinite;
+}
+@keyframes flux {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+    color: #28D7FE;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+    color: #146C80;
+  }
 }
