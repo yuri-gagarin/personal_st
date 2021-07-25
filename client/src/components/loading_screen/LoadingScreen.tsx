@@ -1,11 +1,14 @@
 import React, { FC } from "react";
+import styles from "./css/loadingScreen.module.css";
 
-const LoadingScreen: FC<{}> = (): JSX.Element => {
+export const LoadingScreen: FC<{}> = (): JSX.Element => {
   return (
-    <div>
-
+    <div className={ styles.generalLoadingScreenWrapper }>
+      <div className={ styles.loader }>Loading Something</div>
+      <div className={ styles.loaderText }>
+        Loading<span className={ styles.loadingDot1 }>.</span><span className={ styles.loadingDot2 }>.</span><span className={ styles.loadingDot3 }>.</span>
+      </div>
     </div>
   );
 };
 
-export default LoadingScreen;
