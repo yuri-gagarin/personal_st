@@ -16,7 +16,12 @@ const greeting: InitialGreeting = {
   greeting: ["Hello there and welcome..."],
   instructions: [
     "Please enter your name",
-    "Or Please select option"
+    "Or Please select option",
+    "'1'=Load modern version",
+    "'2'=Chat with us",
+    "'3'=Play a game",
+    "'4'=Turn off terminal",
+    "'5'=Help"
     ///"Please select option"
   ]
 };
@@ -34,7 +39,7 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
       dispatch({ type: action, payload: payload });
     }, delay);
   };
-  const stabledispatch = useCallback(dispatch, []);
+  //const stabledispatch = useCallback(dispatch, []);
   const stableDispatchWithTimeout = useCallback(dispatchWithTimeout, []);
  
   const turnOnPowerSwitch = (e: React.MouseEvent): void => {
@@ -68,19 +73,21 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
     setPowerButtonSound(powerButtonSound);
   }, []);
 
+  /*
   useEffect(() => {
     
     if (powerButtonSound && !screenState.powerOn) {
       setTimeout(() => {
         powerButtonSound.play();
-        stabledispatch({ type: "POWER_ON", payload: {} });
         stabledispatch({ type: "SET_GREETING", payload: greeting });
+        stabledispatch({ type: "POWER_ON", payload: {} });
         stableDispatchWithTimeout("SCREEN_LOADED", null, 1000);
       }, 1000);
      
     }
   }, [ powerButtonSound, screenState.powerOn, stabledispatch, stableDispatchWithTimeout ])
-
+  */
+ 
   return (
     <div id="crtControls">
       <PowerSwitchComponent 

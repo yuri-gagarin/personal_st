@@ -1,0 +1,39 @@
+.initialWelcomeScreenWrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+.launchButtonWrapper {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translateX(-50%);
+  height: 100px;
+  width: 200px;
+  border: 2px solid var(--green-color);
+  border-radius: 5px;
+  padding: 4px;
+}
+.launchButton {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  background: none;
+  color: var(--green-color);
+  font-size: 3em;
+  border: 2px solid var(--green-color);
+  border-radius: 5px;
+  font-family: 'Tourney', cursive;
+  text-shadow: 0 0 3px #37c01b;
+}
+.launchButton:active {
+  outline: none;
+  border: 2px solid rgb(50, 156, 50);
+}
+.launchButton:focus {
+  outline: none;
+}

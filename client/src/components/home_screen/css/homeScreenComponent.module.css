@@ -35,7 +35,6 @@
   border-radius: 14px;
   z-index: 2;
   background: #1f2c23;
-  border: 3px solid green;
 }
 
 .monitorCRT {
@@ -47,6 +46,7 @@
   bottom: 0px;
   left: 0px;;
   background-image: radial-gradient(ellipse, var(--bg) 0%, var(--off) 90%);
+  border-radius: 5px;
   animation: turnOn 1s linear;
 }
 

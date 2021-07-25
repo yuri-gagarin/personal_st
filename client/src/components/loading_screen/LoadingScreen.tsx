@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "./css/loadingScreen.module.css";
 
-export const LoadingScreen: FC<{}> = (): JSX.Element => {
+export const LoadingScreen: React.FC<{}> = (): JSX.Element => {
   return (
     <div className={ styles.generalLoadingScreenWrapper }>
       <div className={ styles.loader }>Loading Something</div>
