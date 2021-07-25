@@ -1,9 +1,10 @@
-import React, { FC, useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
+import { Store } from "../../state/Store";
 import "./css/homeScreenControlls.css";
 // additional components //
 import PowerSwitchComponent from "./PowerSwitchComponent";
-import { Store } from "../../state/Store";
 import { ModernClassicSwitch } from "../switches/ModernClassicSwitch";
+import { dispatchWithTimeout } from "../../state/helpers/generalAppHeplers";
 
 interface InitialGreeting {
   title: string,
@@ -28,30 +29,23 @@ const greeting: InitialGreeting = {
 
 
 
-const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
+const HomeScreenControlls: React.FC<{}> = (): JSX.Element => {
   const [powerButtonSound, setPowerButtonSound] = useState<HTMLAudioElement>();
   const { state, dispatch } = useContext(Store);
   const { screenState } = state;
   // screenState reducer //
-
-  const dispatchWithTimeout = (action: any, payload: any, delay: number): void => {
-    setTimeout(() => {
-      dispatch({ type: action, payload: payload });
-    }, delay);
-  };
-  //const stabledispatch = useCallback(dispatch, []);
-  const stableDispatchWithTimeout = useCallback(dispatchWithTimeout, []);
+  const stabledispatch = useCallback(dispatch, []);
  
   const turnOnPowerSwitch = (e: React.MouseEvent): void => {
     if (powerButtonSound) {
       powerButtonSound.play();
       dispatch({ type: "POWER_ON", payload: {} });
       dispatch({ type: "SET_GREETING", payload: greeting });
-      stableDispatchWithTimeout("SCREEN_LOADED", null, 1000);
+      dispatchWithTimeout(dispatch, { type: "SCREEN_LOADED", payload: {} }, 1000);
     } else {
       dispatch({ type: "POWER_ON", payload: {} });
       dispatch({ type: "SET_GREETING", payload: greeting });
-      stableDispatchWithTimeout("SCREEN_LOADED", null, 1000);
+      dispatchWithTimeout(dispatch, { type: "SCREEN_LOADED", payload: {} }, 1000);
     }
   };
   const turnOffPowerSwitch = (e: React.MouseEvent): void => {
@@ -59,11 +53,11 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
       powerButtonSound.play();
       dispatch({ type: "POWER_OFF", payload: {} });
       dispatch({ type: "CLEAR_GREETING", payload: { title: "", greeting: [], instructions: [] } });
-      stableDispatchWithTimeout("SCREEN_UNLOADED", null, 500);
+      dispatchWithTimeout(dispatch, { type: "SCREEN_UNLOADED", payload: {} }, 500);
     } else {
       dispatch({ type: "POWER_OFF", payload: {} });
       dispatch({ type: "CLEAR_GREETING", payload: { title: "", greeting: [], instructions: [] } });
-      stableDispatchWithTimeout("SCREEN_UNLOADED", null, 500);
+      dispatchWithTimeout(dispatch, { type: "SCREEN_UNLOADED", payload: {} }, 500);
     }
   };
 
@@ -73,7 +67,7 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
     setPowerButtonSound(powerButtonSound);
   }, []);
 
-  /*
+  
   useEffect(() => {
     
     if (powerButtonSound && !screenState.powerOn) {
@@ -81,12 +75,12 @@ const HomeScreenControlls: FC<{}> = (props): JSX.Element => {
         powerButtonSound.play();
         stabledispatch({ type: "SET_GREETING", payload: greeting });
         stabledispatch({ type: "POWER_ON", payload: {} });
-        stableDispatchWithTimeout("SCREEN_LOADED", null, 1000);
+        dispatchWithTimeout(dispatch, { type: "SCREEN_LOADED", payload: {} }, 1000);
       }, 1000);
      
     }
-  }, [ powerButtonSound, screenState.powerOn, stabledispatch, stableDispatchWithTimeout ])
-  */
+  }, [ powerButtonSound, screenState.powerOn, stabledispatch ]);
+  
  
   return (
     <div id="crtControls">

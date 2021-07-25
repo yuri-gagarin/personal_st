@@ -1,0 +1,45 @@
+.terminalReaderWrapper {
+  width: 100%;
+  height: 50px;
+  border: 2px solid var(--green-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.typedLine {
+  border: 2px solid red;
+}
+.typedChar {
+  border: 2px solid white;
+}
+
+.blinker {
+  position: relative;
+  height: 50px;
+  width: 25px;
+  background-color: var(--green-color);
+  animation: terminalReaderBlink 1000ms linear infinite;
+  z-index: 20;
+}
+.textInput {
+  position: relative;
+  z-index: 10;
+  width: 0px;
+  height: 0px;
+  animation: terminalReaderBlink 1000ms linear infinite;
+}
+.textInput:active {
+  border: none;
+  outline: none;
+}
+.textInput:focus {
+  border: none;
+  outline: none;
+}
+
+@keyframes terminalReaderBlink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}

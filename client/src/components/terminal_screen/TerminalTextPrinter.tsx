@@ -6,15 +6,19 @@ import  styles  from "./css/terminalTextPrinter.module.css";
 
 interface TextPrinterProps {
   textArr: string[];
+  setPrintingStart: () => void;
+  setPrintingDone: () => void;
 };
 interface TerminalPrinterState {
-  [name: string]: string | number | (HTMLAudioElement | null);
+  [name: string]: string | number | (HTMLAudioElement | boolean | null);
   keyStrokeSound: (HTMLAudioElement | null);
+  numberOfLines: number;
   currentLinePos: number;
-}
-export const TerminalTextPrinter: React.FC<TextPrinterProps> = ({ textArr }): JSX.Element => {
-  const [ terminalPrinterState, setTerminalPrinterState ] = useState<TerminalPrinterState>({ currentLinePos: 0, keyStrokeSound: null });
+  textLoaded: boolean;
+};
 
+export const TerminalTextPrinter: React.FC<TextPrinterProps> = ({ textArr, setPrintingStart, setPrintingDone }): JSX.Element => {
+  const [ terminalPrinterState, setTerminalPrinterState ] = useState<TerminalPrinterState>({ currentLinePos: 0, numberOfLines: 0, textLoaded: false, keyStrokeSound: null });
   const markLineDone = (lineNumber: number): void => {
     setTerminalPrinterState({ ...terminalPrinterState, currentLinePos: lineNumber + 1 });
   };
@@ -23,17 +27,30 @@ export const TerminalTextPrinter: React.FC<TextPrinterProps> = ({ textArr }): JS
   useEffect(() => {
     const keyStrokeSound: HTMLAudioElement = document.getElementsByClassName("keystrokeSoundTerminal")[0] as HTMLAudioElement;
     if (textArr && textArr.length > 0) {
-      const termPrinterState: TerminalPrinterState = { currentLinePos: 0, keyStrokeSound: keyStrokeSound };
+      const termPrinterState: TerminalPrinterState = { ...terminalPrinterState, keyStrokeSound: keyStrokeSound };
+      let numberOfLines = 0;
       for (let i = 0; i < textArr.length; i++) {
         termPrinterState[`${i}`] = textArr[i];
+        numberOfLines++;
       }
-      setTerminalPrinterState({ ...termPrinterState });
+      setTerminalPrinterState({ ...termPrinterState, textLoaded: true, numberOfLines });
     }
-  }, [ textArr ]);
+  }, [ textArr, terminalPrinterState ]);
+
+  useEffect(() => {
+    if (terminalPrinterState.textLoaded) console.log("printing start");
+  }, [ terminalPrinterState.textLoaded ]);
 
   useEffect(() => {
     if (terminalPrinterState.keyStrokeSound) terminalPrinterState.keyStrokeSound.play().catch(() => console.log("Can't play keystroke sound"));
   }, [ terminalPrinterState.keyStrokeSound ]);
+
+  useEffect(() => {
+    if (terminalPrinterState.textLoaded && (terminalPrinterState.currentLinePos === terminalPrinterState.numberOfLines)) {
+      console.log("printing finished");
+      setPrintingDone();
+    }
+  },  [ terminalPrinterState.currentLinePos, terminalPrinterState.numberOfLines, terminalPrinterState.textLoaded, setPrintingDone ]);
 
   return (
     <div className={ styles.terminalTextLine }>
